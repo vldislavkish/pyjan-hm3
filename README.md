@@ -1,2 +1,2 @@
-# pyjan2025
+Vladislav Kish
 Python test automation course
