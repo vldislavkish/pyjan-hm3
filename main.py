@@ -1,6 +1,52 @@
-def main():
-    print("Hello world!")
+#1 - Заменить символ “#” на символ “/” в строке 'www.my_site.com#about'
+#print('www.my_site.com#about'.replace('#', '/'))
 
 
-if __name__ == "__main__":
-    main()
+#2 - Напишите программу, которая добавляет ‘ing’ к словам
+#print(input('Введите слово, к которому хотите добавить "ing" в конце: ') + 'ing')
+
+
+#3 - В строке “Ivanou Ivan” поменяйте местами слова => "Ivan Ivanou"
+#print(' '.join('Ivanou Ivan'.split()[::-1]))
+
+
+#4 - Напишите программу которая удаляет пробел в начале, в конце строки
+#print(input('Введите слово, в котором хотите удлить пробелы в начале и в конце строки: ').strip())
+
+
+#5 - Имена собственные всегда начинаются с заглавной буквы, за которой следуют строчные буквы.
+# Исправьте данное имя собственное так, чтобы оно соответствовало этому утверждению.
+#print(input('').title())
+
+
+#6 - Перевести строку в список "Robin Singh" => ["Robin”, “Singh"]
+#print(input().split())
+
+
+#7 - "I love arrays they are my favorite" => ["I", "love", "arrays", "they", "are", "my", "favorite"]
+#print('I love arrays they are my favorite'.split())
+
+
+#8 - Дан список: [Ivan, Ivanou], и 2 строки: Minsk, Belarus.Напечатайте текст:
+# “Привет, Ivan Ivanou! Добро пожаловать в Minsk Belarus”
+#lst = ['Ivan', 'Ivanou']
+#town, city = 'Minsk', 'Belarus'
+#print(f'Привет, {' '.join(lst)}! Добро пожаловать в {town} {city}')
+
+
+#9 - Дан список ["I", "love", "arrays", "they", "are", "my", "favorite"]
+# сделайте из него строку => "I love arrays they are my favorite"
+#lst = ["I", "love", "arrays", "they", "are", "my", "favorite"]
+#print(lst:=' '.join(lst))
+
+
+#10 - Создайте список из 10 элементов,
+# вставьте на 3-ю позицию новое значение, удалите элемент из списка под индексом 6
+#import random
+#import string
+#lst = [random.choice(string.printable) for _ in range(10)]
+#print(lst)
+#lst[2] = 'новое значение'
+#print(lst)
+#del lst[6]
+#print(lst)
