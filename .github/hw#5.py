@@ -39,8 +39,9 @@ def ex8():
     # Дан список: [Ivan, Ivanou], и 2 строки: Minsk, Belarus.Напечатайте текст:
     # “Привет, Ivan Ivanou! Добро пожаловать в Minsk Belarus”
     lst = ['Ivan', 'Ivanou']
+    name = ' '.join(lst)
     town, city = 'Minsk', 'Belarus'
-    print(f'Привет, {' '.join(lst)}! Добро пожаловать в {town} {city}')
+    print(f'Привет, {name}! Добро пожаловать в {town} {city}')
 
 
 def ex9():
