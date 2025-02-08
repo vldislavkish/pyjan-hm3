@@ -15,7 +15,7 @@ def ex3():
 
 def ex4():
     # Напишите программу, которая удаляет пробел в начале, в конце строки
-    print(input('Введите слово, в котором хотите удалить пробелы в начале и в конце строки: ').strip())
+    print(input('Введите слово, в котором хотите удалить пробелы: ').strip())
 
 
 def ex5():
@@ -30,7 +30,8 @@ def ex6():
 
 
 def ex7():
-    # "I love arrays they are my favorite" => ["I", "love", "arrays", "they", "are", "my", "favorite"]
+    # "I love arrays they are my favorite" =>
+    # ["I", "love", "arrays", "they", "are", "my", "favorite"]
     print('I love arrays they are my favorite'.split())
 
 
@@ -50,7 +51,8 @@ def ex9():
 
 
 def ex10():
-    # Создайте список из 10 элементов, вставьте на 3-ю позицию новое значение, удалите элемент из списка под индексом 6
+    # Создайте список из 10 элементов,
+    # вставьте на 3-ю позицию новое значение, удалите элемент из списка под индексом 6
     import random
     import string
     lst = [random.choice(string.printable) for _ in range(10)]
