@@ -1,3 +1,7 @@
+import random
+import string
+
+
 def ex1():
     # Заменить символ “#” на символ “/” в строке 'www.my_site.com#about'
     print('www.my_site.com#about'.replace('#', '/'))
@@ -54,8 +58,6 @@ def ex9():
 def ex10():
     # Создайте список из 10 элементов,
     # вставьте на 3-ю позицию новое значение, удалите элемент из списка под индексом 6
-    import random
-    import string
     lst = [random.choice(string.printable) for _ in range(10)]
     print(lst)
     lst[2] = 'новое значение'
