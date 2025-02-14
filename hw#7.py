@@ -36,4 +36,5 @@ def statues(inp):
     rng = set(range(min(stat), max(stat)))
     print(rng - stat)
 
+
 statues('0 2 5 3 11')
