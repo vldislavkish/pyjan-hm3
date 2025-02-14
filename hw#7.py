@@ -12,15 +12,14 @@ def bulls_and_cows():
     while inp != hidden_number:
         inp = [int(d) for d in str(inp)]
         bull, cow = 0, 0
-        for i in range(len(inp)):
-            if inp[i] in hidden_number and inp[i] == hidden_number[i]:
+        for i, v in enumerate(inp):
+            if v in hidden_number and v == hidden_number[i]:
                 bull += 1
-            if inp[i] in hidden_number and inp[i] != hidden_number[i]:
+            if v in hidden_number and v != hidden_number[i]:
                 cow += 1
         if bull != 4:
             print(f'{cow} коровы, {bull} бык')
         else:
-            continue
+            break
         inp = int(input())
-    else:
-        print('Вы выиграли!')
+    print('Вы выиграли!')
