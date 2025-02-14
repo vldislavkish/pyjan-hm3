@@ -13,4 +13,20 @@ def moto_time(inp_m):
     print(datetime.time(hour=inp_h, minute=inp_m), sum(ans_h + ans_m))
 
 
-moto_time(1439)
+def level_up(experience: int, threshold: int, reward: int) -> None:
+    print(experience + reward == threshold)
+
+
+def time_converter(time: str):
+    hour, minute = time.split(':')
+    hour = int(hour)
+    if 0 < hour < 12:
+        print(f'{hour}:{minute} a.m.')
+    elif hour == 12:
+        print(f'{hour}:{minute} p.m.')
+    elif hour == 0:
+        hour += 12
+        print(f'{hour}:{minute} a.m.')
+    else:
+        hour -= 12
+        print(f'{hour}:{minute} p.m.')
