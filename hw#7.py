@@ -29,3 +29,11 @@ def pyramid(n: int) -> None:
     for i in range(n):
         print(' ' * (n - i) + '*' * (i + 1), end='')
         print('*' * i)
+
+
+def statues(inp):
+    stat = set(map(int, inp.split()))
+    rng = set(range(min(stat), max(stat)))
+    print(rng - stat)
+
+statues('0 2 5 3 11')
