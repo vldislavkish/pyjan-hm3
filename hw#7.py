@@ -23,3 +23,9 @@ def bulls_and_cows():
             break
         inp = int(input())
     print('Вы выиграли!')
+
+
+def pyramid(n: int) -> None:
+    for i in range(n):
+        print(' ' * (n - i) + '*' * (i + 1), end='')
+        print('*' * i)
