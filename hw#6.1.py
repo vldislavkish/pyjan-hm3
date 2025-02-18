@@ -14,7 +14,7 @@ def moto_time(inp_m: int) -> None:
 
 
 def level_up(experience: int, threshold: int, reward: int) -> None:
-    print(experience + reward == threshold)
+    print(experience + reward >= threshold)
 
 
 def time_converter(time: str) -> None:
