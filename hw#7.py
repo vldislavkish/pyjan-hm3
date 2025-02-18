@@ -13,7 +13,7 @@ def bulls_and_cows():
         inp = [int(d) for d in str(inp)]
         bull, cow = 0, 0
         for i, v in enumerate(inp):
-            if v in hidden_number and v == hidden_number[i]:
+            if v == hidden_number[i]:
                 bull += 1
             if v in hidden_number:
                 cow += 1
