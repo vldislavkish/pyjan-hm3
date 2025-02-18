@@ -15,7 +15,7 @@ def bulls_and_cows():
         for i, v in enumerate(inp):
             if v in hidden_number and v == hidden_number[i]:
                 bull += 1
-            if v in hidden_number and v != hidden_number[i]:
+            if v in hidden_number:
                 cow += 1
         if bull != 4:
             print(f'{cow} коровы, {bull} бык')
