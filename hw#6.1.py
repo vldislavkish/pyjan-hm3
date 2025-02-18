@@ -19,7 +19,7 @@ def level_up(experience: int, threshold: int, reward: int) -> None:
 
 def time_converter(time: str) -> None:
     hour: int = int(time.split(':')[0])
-    minute = time.split(':')[1]
+    minute: str = time.split(':')[1]
     if 0 < hour < 12:
         print(f'{hour}:{minute} a.m.')
     elif hour == 12:
