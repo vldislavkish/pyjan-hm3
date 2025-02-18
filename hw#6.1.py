@@ -1,7 +1,7 @@
 import datetime
 
 
-def moto_time(inp_m):
+def moto_time(inp_m: int) -> None:
     if not 0 < inp_m < 1440:
         raise ValueError
     inp_h = 0
