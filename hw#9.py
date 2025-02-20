@@ -44,7 +44,7 @@ assert number_on_the_opposite(8, 4) == 0
 
 def validate(num):
     num = list(map(int, str(num)))[::-1]
-    for i in range(len(num)):
+    for i, v in enumerate(num):
         if i % 2:
             num[i] *= 2
             if num[i] > 9:
