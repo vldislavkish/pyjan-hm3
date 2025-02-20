@@ -8,10 +8,7 @@ def solution(sequence):
             del sequence[0]
         else:
             return False
-    if len(set(sequence)) >= 1 and delete == 0 and min(sequence) == sequence[0]:
-        return True
-    else:
-        return False
+    return bool(len(set(sequence)) >= 1 and delete == 0 and min(sequence) == sequence[0])
 
 
 assert solution([1, 1]) is True
