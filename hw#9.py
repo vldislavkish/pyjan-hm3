@@ -40,3 +40,25 @@ assert number_on_the_opposite(12, 3) == 9
 assert number_on_the_opposite(8, 1) == 5
 assert number_on_the_opposite(8, 3) == 7
 assert number_on_the_opposite(8, 4) == 0
+
+
+def validate(num):
+    num = list(map(int, str(num)))[::-1]
+    for i in range(len(num)):
+        if i % 2:
+            num[i] *= 2
+            if num[i] > 9:
+                num[i] = sum(int(i) for i in str(num[i]))
+    return sum(num) % 10 == 0
+
+
+assert validate(4561261212345464) is False
+assert validate(4561261212345467) is True
+assert validate(1234567812345670) is True
+assert validate(1234567812345671) is False
+assert validate(79927398713) is True
+assert validate(79927398714) is False
+assert validate(6011000990139424) is True
+assert validate(6011000990139425) is False
+assert validate(123456789) is False
+assert validate(4222222222222) is True
