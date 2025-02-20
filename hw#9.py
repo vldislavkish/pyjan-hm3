@@ -14,14 +14,14 @@ def solution(sequence):
         return False
 
 
-assert solution([1, 1]) == True
-assert solution([1]) == True
-assert solution([1, 2]) == True
-assert solution([1, 3, 2]) == True
-assert solution([1, 1, 2]) == True
-assert solution([1, 1, 1, 2]) == False
-assert solution([1, 2, 3]) == True
-assert solution([1, 2, 1, 2]) == False
-assert solution([1, 3, 2, 1]) == False
-assert solution([1, 2, 3, 4, 5, 3, 5, 6]) == False
-assert solution([40, 50, 60, 10, 20, 30]) == False
+assert solution([1, 1]) is True
+assert solution([1]) is True
+assert solution([1, 2]) is True
+assert solution([1, 3, 2]) is True
+assert solution([1, 1, 2]) is True
+assert solution([1, 1, 1, 2]) is False
+assert solution([1, 2, 3]) is True
+assert solution([1, 2, 1, 2]) is False
+assert solution([1, 3, 2, 1]) is False
+assert solution([1, 2, 3, 4, 5, 3, 5, 6]) is False
+assert solution([40, 50, 60, 10, 20, 30]) is False
