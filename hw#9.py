@@ -25,12 +25,10 @@ assert subsequence([40, 50, 60, 10, 20, 30]) is False
 
 
 def number_on_the_opposite(n, f_number):
-    if f_number > n // 2:
+    if f_number >= n // 2:
         return f_number - n // 2
-    if f_number < n // 2:
+    else:
         return f_number + n // 2
-    if f_number == n // 2:
-        return 0
 
 
 assert number_on_the_opposite(10, 6) == 1
