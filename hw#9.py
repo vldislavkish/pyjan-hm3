@@ -46,9 +46,11 @@ def validate(num):
     num = list(map(int, str(num)))[::-1]
     for i, v in enumerate(num):
         if i % 2:
-            num[i] *= 2
-            if num[i] > 9:
-                num[i] = sum(int(i) for i in str(num[i]))
+            v *= 2
+            num[i] = v
+            if v > 9:
+                v = sum(int(i) for i in str(v))
+                num[i] = v
     return sum(num) % 10 == 0
 
 
