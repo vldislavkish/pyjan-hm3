@@ -19,8 +19,8 @@ def calculate_salary(salary: int, bonus=True) -> str:
 def count_vowls(word):
     vowls = 'aeiouyAEIOUY'
     count = 0
-    for l in word:
-        if l in vowls:
+    for w in word:
+        if w in vowls:
             count += 1
     return count
 
@@ -32,7 +32,10 @@ def sort_vowel(lst: list[str]):
 def generate_password(n: int) -> str:
     if n < 4:
         raise ValueError('Пароль должен содержать минимум 4 символа')
-    lst_pass = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz', '1234567890', r'!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~']
+    lst_pass = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                'abcdefghijklmnopqrstuvwxyz',
+                '1234567890',
+                r'!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~']
     password = [random.choice(l) for l in lst_pass]
     while len(password) != n:
         ind = random.randint(0, 3)
