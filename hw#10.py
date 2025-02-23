@@ -17,7 +17,7 @@ assert lines_character("#######") == ""
 assert lines_character("") == ""
 
 
-def candles(candle_number: int, make_new: int, count = 0, left = 0) -> int:
+def candles(candle_number: int, make_new: int, count=0, left=0) -> int:
     count += candle_number
     left += candle_number
     while left > 0 and candle_number > 0:
@@ -39,14 +39,14 @@ assert candles(2, 3) == 2
 
 def counting_num_let(text: str) -> str:
     new_lst = []
-    text = list(text)
-    for i, v in enumerate(text):
+    new_text = list(text)
+    for i, v in enumerate(new_text):
         new_lst.append(v)
         count = 1
-        for ii, vv in enumerate(text[i + 1:]):
+        for ii, vv in enumerate(new_text[i + 1:]):
             if vv == v:
                 count += 1
-                del text[ii]
+                del new_text[ii]
                 continue
             else:
                 break
