@@ -47,7 +47,6 @@ def counting_num_let(text: str) -> str:
             if vv == v:
                 count += 1
                 del new_text[ii]
-                continue
             else:
                 break
         if count > 1:
