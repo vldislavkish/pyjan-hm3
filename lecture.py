@@ -36,7 +36,7 @@ def generate_password(n: int) -> str:
                 'abcdefghijklmnopqrstuvwxyz',
                 '1234567890',
                 r'!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~']
-    password = [random.choice(l) for l in lst_pass]
+    password = [random.choice(lst) for lst in lst_pass]
     while len(password) != n:
         ind = random.randint(0, 3)
         password.append(random.choice(lst_pass[ind]))
