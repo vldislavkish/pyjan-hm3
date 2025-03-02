@@ -1,4 +1,4 @@
-#Положительные аргументы функции
+# Положительные аргументы функции
 def validate_arguments(func):
     def wrapper(*args):
         for arg in args:
@@ -8,7 +8,7 @@ def validate_arguments(func):
     return wrapper
 
 
-#Вернуть число
+# Вернуть число
 def validate_result(func):
     def wrapper(*args):
         if not isinstance(func(*args), (int, float)):
@@ -17,7 +17,7 @@ def validate_result(func):
     return wrapper
 
 
-#Декоратор типов
+# Декоратор типов
 def typed(style):
     def dec_arg(func):
         def wrapper(*args):
