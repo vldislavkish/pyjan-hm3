@@ -8,13 +8,31 @@ def validate_arguments(func):
     return wrapper
 
 
+@validate_arguments
+def example_function(a, b, c):
+    return a + b + c
+
+
+print(example_function(1, 2, 3))
+#print(example_function(-1, 2, 3))
+
+
 # Вернуть число
 def validate_result(func):
     def wrapper(*args):
-        if not isinstance(func(*args), (int, float)):
+        if not all([isinstance(arg, (int, float)) for arg in args]):
             print('Результат функции должен быть числом')
-        return f'{func(*args)} = {type(func(*args))}'
+        else:
+            print(f'{func(*args)} = {type(func(*args))}')
     return wrapper
+
+@validate_result
+def example_function(a, b):
+    return a + b
+
+
+example_function(2, 3)
+example_function("2", 3)
 
 
 # Декоратор типов
@@ -25,3 +43,24 @@ def typed(style):
             return func(*new_args)
         return wrapper
     return dec_arg
+
+
+@typed(style=str)
+def add(a, b):
+    return a + b
+
+add("3", 5)
+add(5, 5)
+add('a', 'b')
+
+@typed(style=int)
+def add(a, b, с):
+    return a + b + с
+
+add(5, 6, 7)
+
+@typed(style=float)
+def add(a, b, с):
+    return a + b + с
+
+add(0.1, 0.2, 0.4)
