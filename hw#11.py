@@ -14,7 +14,7 @@ def example_function(a, b, c):
 
 
 print(example_function(1, 2, 3))
-#print(example_function(-1, 2, 3))
+print(example_function(-1, 2, 3))
 
 
 # Вернуть число
@@ -27,12 +27,12 @@ def validate_result(func):
     return wrapper
 
 @validate_result
-def example_function(a, b):
+def example_function1(a, b):
     return a + b
 
 
-example_function(2, 3)
-example_function("2", 3)
+example_function1(2, 3)
+example_function1("2", 3)
 
 
 # Декоратор типов
@@ -54,13 +54,13 @@ add(5, 5)
 add('a', 'b')
 
 @typed(style=int)
-def add(a, b, с):
-    return a + b + с
+def add2(a, b, c):
+    return a + b + c
 
-add(5, 6, 7)
+add2(5, 6, 7)
 
 @typed(style=float)
-def add(a, b, с):
-    return a + b + с
+def add3(a, b, c):
+    return a + b + c
 
-add(0.1, 0.2, 0.4)
+add3(0.1, 0.2, 0.4)
