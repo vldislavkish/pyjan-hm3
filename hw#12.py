@@ -3,7 +3,7 @@ import string
 
 
 class Bank:
-    _data = {}
+    _data = dict()
 
     def register_client(self):
         name = input('Введите свое имя: ')
