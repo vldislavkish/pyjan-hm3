@@ -40,8 +40,50 @@ class Bank:
             print('Ошибка. Неправильно введён ID')
 
 
-bank = Bank()
-bank.register_client()
-bank.open_deposit_account()
-bank.calc_deposit_interest_rate()
-bank.close_deposit()
+class Library:
+    _data_books: dict[str, dict] = {}
+    _data_readers: dict[str, dict] = {}
+
+    def adding_book(self, author, book_name, num_pages, isbn, reserved=False):
+        if author not in self._data_books:
+            self._data_books.setdefault(author, {isbn: [book_name, num_pages, reserved]})
+        else:
+            self._data_books[author].setdefault(isbn, [book_name, num_pages, reserved])
+
+    def adding_reader(self):
+        client_id = ''.join(random.choice(string.hexdigits) for _ in range(12))
+        self._data_readers.setdefault(client_id, {})
+        print(f'Ваш ID: {client_id}')
+
+    def reserve_book(self):
+        r_id = input('Введите ваш ID: ')
+        if r_id in self._data_readers:
+            for author in self._data_books:
+                print(f'Автор: {author}')
+                for isbn, prod in self._data_books[author].items():
+                    print(f'\tНазвание книги: {prod[0]}, кол-во страниц: {prod[1]}, ISBN: {isbn} {'зарезервирована' if prod[2] else ''}')
+            print()
+            wyw = input('Введите ISBN книги, которую хотите зарезервировать: ')
+            for author in self._data_books:
+                if wyw in self._data_books[author]:
+                    if self._data_books[author][wyw][-1]:
+                        print('К сожалению книга зарезервирована, попробуйте другую')
+                    else:
+                        self._data_books[author][wyw][-1] = True
+                        self._data_readers[r_id].setdefault(wyw, self._data_books[author][wyw])
+                        print('Книга успешно зарезервирована')
+        else:
+            print('Неверный ID')
+
+
+
+
+lib = Library()
+lib.adding_book('Tolkien', 'Hobbit', 400, '000465189')
+lib.adding_book('Tolkien', 'Rabbit', 123, '000498789489')
+lib.adding_book('Tolstoy', 'Mir i mir', 13, '123123123213')
+lib.adding_reader()
+lib.reserve_book()
+lib.reserve_book()
+print(lib._data_books)
+print(lib._data_readers)
