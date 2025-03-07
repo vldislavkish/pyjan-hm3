@@ -41,43 +41,52 @@ class Bank:
 
 
 class Library:
-    _data_books: dict[str, dict] = {}
+    _data_books: dict[tuple, list] = {}
     _data_readers: dict[str, dict] = {}
 
     def adding_book(self, author, book_name, num_pages, isbn, reserved=False, taken=False):
-        if author not in self._data_books:
-            self._data_books.setdefault(author, {isbn: [book_name, num_pages, reserved, taken]})
+        if (author, book_name, num_pages, isbn) not in self._data_books:
+            self._data_books.setdefault((author, book_name, num_pages, isbn), [reserved, taken])
         else:
-            self._data_books[author].setdefault(isbn, [book_name, num_pages, reserved, taken])
+            print('Данная книга есть в наличии')
 
     def adding_reader(self):
         client_id = ''.join(random.choice(string.hexdigits) for _ in range(12))
-        self._data_readers.setdefault(client_id, {})
+        self._data_readers.setdefault(client_id, {'reserved': [], 'taken': []})
         print(f'Ваш ID: {client_id}')
 
     def reserve_book(self):
         r_id = input('Введите ваш ID: ')
         if r_id in self._data_readers:
-            for author in self._data_books:
-                print(f'Автор: {author}')
-                for isbn, prod in self._data_books[author].items():
-                    print(f'\tНазвание книги: {prod[0]}, кол-во страниц: {prod[1]}, ISBN: {isbn} '
-                          f'{'зарезервирована' if prod[-2] else ''}'
-                          f'{'используется' if prod[-1] else ''}')
-            print()
+            for author, book_name, num_pages, isbn in self._data_books:
+                print(f'Автор: {author}, название: {book_name}, кол-во страниц: {num_pages}, ISBN: {isbn} '
+                      f'{'ЗАРАЗЕРВИРОВАНА' if self._data_books[author, book_name, num_pages, isbn][0] else ''} '
+                      f'{'ИСПОЛЬЗУЕТСЯ' if self._data_books[author, book_name, num_pages, isbn][1] else ''}')
             wyw = input('Введите ISBN книги, которую хотите зарезервировать: ')
             for author in self._data_books:
-                if wyw in self._data_books[author]:
-                    if self._data_books[author][wyw][-2]:
+                if wyw in author:
+                    if self._data_books[author][0]:
                         print('К сожалению книга зарезервирована, попробуйте другую')
                     else:
-                        self._data_books[author][wyw][-2] = True
-                        self._data_readers[r_id].setdefault(wyw, self._data_books[author][wyw])
+                        self._data_books[author][0] = True
+                        self._data_readers[r_id]['reserved'].append(author)
                         print('Книга успешно зарезервирована')
         else:
             print('Неверный ID')
 
-
+    def cancel_reserve(self):
+        r_id = input('Введите ваш ID: ')
+        if r_id in self._data_readers:
+            wyw = input('Введите ISBN книги, для которой хотите отклонить резервацию: ')
+            for i, v in enumerate(self._data_readers[r_id]['reserved']):
+                if wyw in v:
+                    del self._data_readers[r_id]['reserved'][i]
+                    for author in self._data_books:
+                        if wyw in author:
+                            self._data_books[author][0] = False
+                            break
+        else:
+            print('Неверный ID')
 
 
 lib = Library()
@@ -87,5 +96,6 @@ lib.adding_book('Tolstoy', 'Mir i mir', 13, '123123123213')
 lib.adding_reader()
 lib.reserve_book()
 lib.reserve_book()
+lib.cancel_reserve()
 print(lib._data_books)
 print(lib._data_readers)
