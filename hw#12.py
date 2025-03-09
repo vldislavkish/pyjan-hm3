@@ -88,6 +88,44 @@ class Library:
         else:
             print('Неверный ID')
 
+    def get_book(self):
+        r_id = input('Введите ваш ID: ')
+        if r_id in self._data_readers:
+            for author, book_name, num_pages, isbn in self._data_books:
+                print(f'Автор: {author}, название: {book_name}, кол-во страниц: {num_pages}, ISBN: {isbn} '
+                      f'{'ЗАРАЗЕРВИРОВАНА' if self._data_books[author, book_name, num_pages, isbn][0] else ''} '
+                      f'{'ИСПОЛЬЗУЕТСЯ' if self._data_books[author, book_name, num_pages, isbn][1] else ''}')
+            wyw = input('Введите ISBN книги, которую хотите взять: ')
+            for author in self._data_books:
+                if wyw in author:
+                    if self._data_books[author][0]:
+                        if author in self._data_readers[r_id]['reserved']:
+                            self._data_books[author][1] = True
+                            self._data_readers[r_id]['taken'].append(author)
+                            print('Книга успешно взята')
+                            self._data_books[author][0] = False
+                            ind = self._data_readers[r_id]['reserved'].index(author)
+                            del self._data_readers[r_id]['reserved'][ind]
+                        else:
+                            print('К сожалению книга зарезервирована, попробуйте другую')
+                    elif self._data_books[author][1]:
+                        print('К сожалению книга используется, попробуйте другую')
+                    else:
+                        self._data_books[author][1] = True
+                        self._data_readers[r_id]['taken'].append(author)
+                        print('Книга успешно взята')
+                        if self._data_books[author][0]:
+                            self._data_books[author][0] = False
+        else:
+            print('Неверный ID')
+
+    def return_book(self):
+        r_id = input('Введите ваш ID: ')
+        if r_id in self._data_readers:
+            pass
+        else:
+            print('Неверный ID')
+
 
 lib = Library()
 lib.adding_book('Tolkien', 'Hobbit', 400, '000465189')
@@ -95,7 +133,12 @@ lib.adding_book('Tolkien', 'Rabbit', 123, '000498789489')
 lib.adding_book('Tolstoy', 'Mir i mir', 13, '123123123213')
 lib.adding_reader()
 lib.reserve_book()
+lib.adding_reader()
 lib.reserve_book()
-lib.cancel_reserve()
+#lib.reserve_book()
+#lib.cancel_reserve()
+lib.get_book()
+lib.get_book()
+
 print(lib._data_books)
 print(lib._data_readers)
