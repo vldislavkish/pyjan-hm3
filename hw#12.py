@@ -57,9 +57,9 @@ class Library:
                   f'ISBN: {isbn}', end=' ')
             print(f'{reserved} {taken}')
 
-    def adding_book(self, author, book_name, num_pages, isbn, reserved=False, taken=False):
+    def adding_book(self, author, book_name, num_pages, isbn):
         if (author, book_name, num_pages, isbn) not in self._data_books:
-            self._data_books.setdefault((author, book_name, num_pages, isbn), [reserved, taken])
+            self._data_books.setdefault((author, book_name, num_pages, isbn), [False, False])
         else:
             print('Данная книга есть в наличии')
 
@@ -96,8 +96,7 @@ class Library:
                             self._data_books[author][0] = False
                             print('Резервация отклонена')
                             break
-            else:
-                print('Вы не резервировали данну книгу')
+            print('Вы не резервировали данну книгу')
         else:
             print('Неверный ID')
 
@@ -142,8 +141,7 @@ class Library:
                             self._data_books[author][1] = False
                             print('Спасибо, что вернули книгу')
                             break
-            else:
-                print('Вы не брали такую книгу')
+            print('Вы не брали такую книгу')
         else:
             print('Неверный ID')
 
