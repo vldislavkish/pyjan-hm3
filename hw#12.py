@@ -90,9 +90,9 @@ class Library:
             for i, v in enumerate(self._data_readers[r_id]['reserved']):
                 if wyw in v:
                     del self._data_readers[r_id]['reserved'][i]
-                    for author, _ in self._data_books.items():
+                    for author, rvd_tkn in self._data_books.items():
                         if wyw in author:
-                            self._data_books[author][0] = False
+                            rvd_tkn[0] = False
                             print('Резервация отклонена')
                             break
             print('Вы не резервировали данну книгу')
@@ -135,9 +135,9 @@ class Library:
             for i, v in enumerate(self._data_readers[r_id]['taken']):
                 if wyw in v:
                     del self._data_readers[r_id]['taken'][i]
-                    for author, _ in self._data_books.items():
+                    for author, rvd_tkn in self._data_books.items():
                         if wyw in author:
-                            self._data_books[author][1] = False
+                            rvd_tkn[1] = False
                             print('Спасибо, что вернули книгу')
                             break
                 print('Вы не брали такую книгу')
