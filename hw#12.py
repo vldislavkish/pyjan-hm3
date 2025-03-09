@@ -59,7 +59,10 @@ class Library:
         r_id = input('Введите ваш ID: ')
         if r_id in self._data_readers:
             for author, book_name, num_pages, isbn in self._data_books:
-                print(f'Автор: {author}, название: {book_name}, кол-во страниц: {num_pages}, ISBN: {isbn} '
+                print(f'Автор: {author}, '
+                      f'название: {book_name}, '
+                      f'кол-во страниц: {num_pages}, '
+                      f'ISBN: {isbn} '
                       f'{'ЗАРАЗЕРВИРОВАНА' if self._data_books[author, book_name, num_pages, isbn][0] else ''} '
                       f'{'ИСПОЛЬЗУЕТСЯ' if self._data_books[author, book_name, num_pages, isbn][1] else ''}')
             wyw = input('Введите ISBN книги, которую хотите зарезервировать: ')
