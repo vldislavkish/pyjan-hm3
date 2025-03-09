@@ -122,7 +122,14 @@ class Library:
     def return_book(self):
         r_id = input('Введите ваш ID: ')
         if r_id in self._data_readers:
-            pass
+            wyw = input('Введите ISBN книги, которую хотите вернуть: ')
+            for i, v in enumerate(self._data_readers[r_id]['taken']):
+                if wyw in v:
+                    del self._data_readers[r_id]['taken'][i]
+                    for author in self._data_books:
+                        if wyw in author:
+                            self._data_books[author][1] = False
+                            break
         else:
             print('Неверный ID')
 
@@ -130,15 +137,13 @@ class Library:
 lib = Library()
 lib.adding_book('Tolkien', 'Hobbit', 400, '000465189')
 lib.adding_book('Tolkien', 'Rabbit', 123, '000498789489')
-lib.adding_book('Tolstoy', 'Mir i mir', 13, '123123123213')
+lib.adding_book('Tolstoy', 'Miru mir', 13, '123123123213')
+lib.adding_reader()
+# lib.reserve_book()
 lib.adding_reader()
 lib.reserve_book()
-lib.adding_reader()
-lib.reserve_book()
-#lib.reserve_book()
-#lib.cancel_reserve()
+# lib.reserve_book()
+# lib.cancel_reserve()
 lib.get_book()
+lib.return_book()
 lib.get_book()
-
-print(lib._data_books)
-print(lib._data_readers)
