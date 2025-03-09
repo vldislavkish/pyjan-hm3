@@ -44,7 +44,6 @@ class Library:
     _data_books: dict[tuple, list] = {}
     _data_readers: dict[str, dict] = {}
 
-
     def show_list_books(self):
         for author, book_name, num_pages, isbn in self._data_books:
             reserved = 'ЗАРЕЗЕРВИРОВАНА' \
