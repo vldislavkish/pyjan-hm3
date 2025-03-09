@@ -72,7 +72,7 @@ class Library:
         if r_id in self._data_readers:
             self.show_list_books()
             wyw = input('Введите ISBN книги, которую хотите зарезервировать: ')
-            for author in self._data_books:
+            for author, _ in self._data_books.items():
                 if wyw in author:
                     if self._data_books[author][0]:
                         print('К сожалению книга зарезервирована, попробуйте другую')
@@ -90,7 +90,7 @@ class Library:
             for i, v in enumerate(self._data_readers[r_id]['reserved']):
                 if wyw in v:
                     del self._data_readers[r_id]['reserved'][i]
-                    for author in self._data_books:
+                    for author, _ in self._data_books.items():
                         if wyw in author:
                             self._data_books[author][0] = False
                             print('Резервация отклонена')
@@ -104,7 +104,7 @@ class Library:
         if r_id in self._data_readers:
             self.show_list_books()
             wyw = input('Введите ISBN книги, которую хотите взять: ')
-            for author in self._data_books:
+            for author, _ in self._data_books.items():
                 if wyw in author:
                     if self._data_books[author][0]:
                         if self._data_books[author][1]:
@@ -135,7 +135,7 @@ class Library:
             for i, v in enumerate(self._data_readers[r_id]['taken']):
                 if wyw in v:
                     del self._data_readers[r_id]['taken'][i]
-                    for author in self._data_books:
+                    for author, _ in self._data_books.items():
                         if wyw in author:
                             self._data_books[author][1] = False
                             print('Спасибо, что вернули книгу')
