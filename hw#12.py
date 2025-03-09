@@ -47,13 +47,15 @@ class Library:
 
     def show_list_books(self):
         for author, book_name, num_pages, isbn in self._data_books:
-            reserved = 'ЗАРЕЗЕРВИРОВАНА' if self._data_books[author, book_name, num_pages, isbn][0] else ''
-            taken = 'ИСПОЛЬЗУЕТСЯ' if self._data_books[author, book_name, num_pages, isbn][1] else ''
+            reserved = 'ЗАРЕЗЕРВИРОВАНА' \
+                if self._data_books[author, book_name, num_pages, isbn][0] else ''
+            taken = 'ИСПОЛЬЗУЕТСЯ' \
+                if self._data_books[author, book_name, num_pages, isbn][1] else ''
             print(f'Автор: {author}, '
                   f'название: {book_name}, '
                   f'кол-во страниц: {num_pages}, '
-                  f'ISBN: {isbn} '
-                  f'{reserved} {taken}')
+                  f'ISBN: {isbn}', end=' ')
+            print(f'{reserved} {taken}')
 
     def adding_book(self, author, book_name, num_pages, isbn, reserved=False, taken=False):
         if (author, book_name, num_pages, isbn) not in self._data_books:
@@ -107,6 +109,9 @@ class Library:
             for author in self._data_books:
                 if wyw in author:
                     if self._data_books[author][0]:
+                        if self._data_books[author][1]:
+                            print('К сожалению книга используется, попробуйте другую')
+                            break
                         if author in self._data_readers[r_id]['reserved']:
                             self._data_books[author][1] = True
                             self._data_readers[r_id]['taken'].append(author)
@@ -116,8 +121,6 @@ class Library:
                             del self._data_readers[r_id]['reserved'][ind]
                         else:
                             print('К сожалению книга зарезервирована, попробуйте другую')
-                    elif self._data_books[author][1]:
-                        print('К сожалению книга используется, попробуйте другую')
                     else:
                         self._data_books[author][1] = True
                         self._data_readers[r_id]['taken'].append(author)
@@ -145,16 +148,18 @@ class Library:
             print('Неверный ID')
 
 
-#lib = Library()
-# lib.adding_book('Tolkien', 'Hobbit', 400, '000465189')
+lib = Library()
+lib.adding_book('Tolkien', 'Hobbit', 400, '000465189')
 # lib.adding_book('Tolkien', 'Rabbit', 123, '000498789489')
 # lib.adding_book('Tolstoy', 'Miru mir', 13, '123123123213')
-# lib.adding_reader()
+lib.adding_reader()
+lib.get_book()
+lib.adding_reader()
+lib.reserve_book()
+lib.get_book()
 # lib.reserve_book()
-# lib.adding_reader()
 # lib.reserve_book()
-# lib.reserve_book()
-#lib.cancel_reserve()
-#lib.get_book()
-#lib.return_book()
-#lib.get_book()
+# lib.cancel_reserve()
+# lib.get_book()
+# lib.return_book()
+# lib.get_book()
