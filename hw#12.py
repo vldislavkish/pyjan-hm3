@@ -72,12 +72,12 @@ class Library:
         if r_id in self._data_readers:
             self.show_list_books()
             wyw = input('Введите ISBN книги, которую хотите зарезервировать: ')
-            for author, _ in self._data_books.items():
+            for author, rvd_tkn in self._data_books.items():
                 if wyw in author:
-                    if self._data_books[author][0]:
+                    if rvd_tkn[0]:
                         print('К сожалению книга зарезервирована, попробуйте другую')
                     else:
-                        self._data_books[author][0] = True
+                        rvd_tkn[0] = True
                         self._data_readers[r_id]['reserved'].append(author)
                         print('Книга успешно зарезервирована')
         else:
@@ -104,27 +104,27 @@ class Library:
         if r_id in self._data_readers:
             self.show_list_books()
             wyw = input('Введите ISBN книги, которую хотите взять: ')
-            for author, _ in self._data_books.items():
-                if wyw in author:
-                    if self._data_books[author][0]:
-                        if self._data_books[author][1]:
+            for book, rvd_tkn in self._data_books.items():
+                if wyw in book:
+                    if rvd_tkn[0]:
+                        if rvd_tkn[1]:
                             print('К сожалению книга используется, попробуйте другую')
                             break
-                        if author in self._data_readers[r_id]['reserved']:
-                            self._data_books[author][1] = True
-                            self._data_readers[r_id]['taken'].append(author)
+                        if book in self._data_readers[r_id]['reserved']:
+                            rvd_tkn[1] = True
+                            self._data_readers[r_id]['taken'].append(book)
                             print('Книга успешно взята')
-                            self._data_books[author][0] = False
-                            ind = self._data_readers[r_id]['reserved'].index(author)
+                            rvd_tkn[0] = False
+                            ind = self._data_readers[r_id]['reserved'].index(book)
                             del self._data_readers[r_id]['reserved'][ind]
                         else:
                             print('К сожалению книга зарезервирована, попробуйте другую')
                     else:
-                        self._data_books[author][1] = True
-                        self._data_readers[r_id]['taken'].append(author)
+                        rvd_tkn[1] = True
+                        self._data_readers[r_id]['taken'].append(book)
                         print('Книга успешно взята')
-                        if self._data_books[author][0]:
-                            self._data_books[author][0] = False
+                        if rvd_tkn[0]:
+                            rvd_tkn[0] = False
         else:
             print('Неверный ID')
 
