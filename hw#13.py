@@ -43,12 +43,10 @@ class CurrencyConverter:
         for i, v in enumerate(self._data[val1], start=1):
             print(i, v, sep=': ')
 
-        que2 = int(input(f'Выберите заданную валюту: '))
+        que2 = int(input('Выберите заданную валюту: '))
         val2 = list(self._data[val1].keys())[que2 - 1]
 
-
         print(f'Из {amount} {val1} получится {round(amount / self._data[val1][val2], 3)} {val2}')
-
 
 cur = CurrencyConverter
 cur()
