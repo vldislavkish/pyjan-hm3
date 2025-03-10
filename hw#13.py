@@ -48,5 +48,6 @@ class CurrencyConverter:
 
         print(f'Из {amount} {val1} получится {round(amount / self._data[val1][val2], 3)} {val2}')
 
+
 cur = CurrencyConverter
 cur()
