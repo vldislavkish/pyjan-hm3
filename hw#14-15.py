@@ -9,8 +9,8 @@ class Students:
         students = ['sasha', 'tanya', 'masha', 'kirill', 'sergei', 'mihail', 'gleb']
         file = open('students.txt', 'w', encoding='UTF-8')
         for _ in range(random.randint(3, 6)):
-            file.write(f'\t\tГруппа {''.join(random.choice(string.hexdigits) 
-                                             for _ in range(12))}\n')
+            gid = ''.join(random.choice(string.hexdigits) for _ in range(12))
+            file.write(f'\t\tГруппа {gid}\n')
             file.write('Студент:\tОценка:\n')
             for _ in range(random.randint(3, 7)):
                 file.write(f'\t{random.choice(students)}\t\t\t{random.randint(1, 10)}\n')
