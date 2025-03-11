@@ -1,6 +1,23 @@
+import json
 import random
 import re
 import string
+import logging
+
+# Создаем логгер
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Создаем обработчик, который выводит лог на консоль
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
+
+# Создаем форматтер и добавляем его к обработчику
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+
+# Добавляем обработчик к логгеру
+logger.addHandler(console_handler)
 
 
 class Students:
@@ -58,3 +75,30 @@ def is_valid_password(password):
 def remove_repeated_words(text):
     corrected_text = re.sub(r'\b(\w+)(\s+\1\b)+', r'\1', text)
     return corrected_text
+
+
+class UefaJSON:
+
+    @staticmethod
+    def write_clubs_uefa_cl():
+        data = {'Реал Мадрид': {'Страна': 'Испания', 'Трофеев': 15},
+               'Милан': {'Страна': 'Италия', 'Трофеев': 7},
+               'Бавария': {'Страна': 'Германия', 'Трофеев': 6},
+               'Ливерпуль': {'Страна': 'Англия', 'Трофеев': 6},
+               'Барселона': {'Страна': 'Испания', 'Трофеев': 5},
+               'Аякс': {'Страна': 'Голландия', 'Трофеев': 4},
+               'Интернационале': {'Страна': 'Италия', 'Трофеев': 3},
+               'Манчестер Юнайтед': {'Страна': 'Англия', 'Трофеев': 3}}
+
+        json_data = json.dumps(data)
+
+        with open('uefa.json', 'w', encoding='UTF-8') as file:
+            file.write(json_data)
+
+    @staticmethod
+    def read_clubs_uefa_cl():
+        with open('uefa.json', 'r', encoding='UTF-8') as file:
+            dec_data = json.loads(file.read())
+            new_dec_data = {k: v['Трофеев'] for k, v in dec_data.items()}
+            lst = sorted(new_dec_data.items(), key=lambda item: item[1], reverse=True)
+            logger.debug(f'Клуб с наибольшим количеством побед: {lst[0][0]}')
