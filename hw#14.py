@@ -1,4 +1,5 @@
 import random
+import re
 import string
 
 
@@ -41,3 +42,17 @@ class Students:
                            f'средняя оценка группы {average_rating}\n')
                 total += amount
             file.write(f'Общее кол-во студентов: {total}')
+
+
+def find_dates(file):
+    pat = r"\d{2}\.\d{2}\.[1-9]\d{3}"
+    dates = re.findall(pat, file)
+    return dates
+
+def is_valid_password(password):
+    pat = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{4,}$'
+    return bool(re.match(pat, password))
+
+def remove_repeated_words(text):
+    corrected_text = re.sub(r'\b(\w+)(\s+\1\b)+', r'\1', text)
+    return corrected_text
