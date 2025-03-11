@@ -3,7 +3,7 @@ import random
 import re
 import string
 import logging
-import xml.etree.cElementTree as xmlET
+import xml.etree.ElementTree as xmlET
 
 # Создаем логгер
 logger = logging.getLogger(__name__)
@@ -133,4 +133,5 @@ class GoodsXML:
     def read_file_xml():
         with open('goodsXML.xml', encoding='UTF-8') as file:
             root = xmlET.fromstring(file.read())
-            logger.debug('Общая стоимость всех товаров: %s', sum(int(tel.attrib['price']) for tel in root))
+            logger.debug('Общая стоимость всех товаров: %s',
+                         sum(int(tel.attrib['price']) for tel in root))
