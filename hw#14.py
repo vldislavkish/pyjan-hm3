@@ -3,7 +3,7 @@ import random
 import re
 import string
 import logging
-import xml.etree.cElementTree as ET
+import xml.etree.cElementTree as xmlET
 
 # Создаем логгер
 logger = logging.getLogger(__name__)
@@ -111,17 +111,26 @@ class GoodsXML:
 
     @staticmethod
     def make_file_xml():
-        root = ET.Element('root')
+        root = xmlET.Element('root')
 
-        ET.SubElement(root, 'tel1', name='Xiaomi Redmi Note 14 Pro+ 5G 12GB/512GB', price='1490', amount='5')
-        ET.SubElement(root, 'tel2', name='Apple iPhone 16e 128GB', price='2390', amount='3')
-        ET.SubElement(root, 'tel3', name='Samsung Galaxy S25 Ultra SM-S938B 12GB/256GB', price='3925', amount='7')
+        xmlET.SubElement(root, 'tel1',
+                         name='Xiaomi Redmi Note 14 Pro+ 5G 12GB/512GB',
+                         price='1490',
+                         amount='5')
+        xmlET.SubElement(root, 'tel2',
+                         name='Apple iPhone 16e 128GB',
+                         price='2390',
+                         amount='3')
+        xmlET.SubElement(root, 'tel3',
+                         name='Samsung Galaxy S25 Ultra SM-S938B 12GB/256GB',
+                         price='3925',
+                         amount='7')
 
-        tree = ET.ElementTree(root)
+        tree = xmlET.ElementTree(root)
         tree.write('goodsXML.xml')
 
     @staticmethod
     def read_file_xml():
-        with open('goodsXML.xml') as file:
-            root = ET.fromstring(file.read())
+        with open('goodsXML.xml', encoding='UTF-8') as file:
+            root = xmlET.fromstring(file.read())
             logger.debug('Общая стоимость всех товаров: %s', sum(int(tel.attrib['price']) for tel in root))
