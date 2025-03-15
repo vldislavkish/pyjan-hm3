@@ -43,7 +43,7 @@ class Students:
 
     @classmethod
     def read_student_file(cls):
-        with (open('students.txt', encoding='UTF-8') as file):
+        with open('students.txt', encoding='UTF-8') as file:
             for line in file:
                 lst = line.split()
                 if lst[0] == 'Группа':
@@ -152,12 +152,12 @@ class BooksYAML:
         self.year_issue = year_issue
         books_yaml = {self.name: [self.author, self.year_issue]}
 
-        with open('books.yaml', 'w') as file:
+        with open('books.yaml', 'w', encoding="utf-8") as file:
             yaml.dump(books_yaml, file)
 
     @staticmethod
     def read_yaml():
-        with open('books.yaml') as file:
+        with open('books.yaml', encoding="utf-8") as file:
             for name, (author, year_issue) in yaml.safe_load(file).items():
                 print(f'Название: {name}, '
                       f'автор: {author}, '
