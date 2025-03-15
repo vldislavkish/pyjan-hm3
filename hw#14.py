@@ -4,6 +4,7 @@ import re
 import string
 import logging
 import xml.etree.ElementTree as xmlET
+import yaml
 
 # Создаем логгер
 logger = logging.getLogger(__name__)
@@ -14,7 +15,8 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)
 
 # Создаем форматтер и добавляем его к обработчику
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter('%(asctime)s - %(name)s - '
+                              '%(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)
 
 # Добавляем обработчик к логгеру
@@ -25,20 +27,23 @@ class Students:
 
     @staticmethod
     def make_student_file():
-        students = ['sasha', 'tanya', 'masha', 'kirill', 'sergei', 'mihail', 'gleb']
+        students = ['sasha', 'tanya', 'masha',
+                    'kirill', 'sergei', 'mihail', 'gleb']
         with open('students.txt', 'w', encoding='UTF-8') as file:
             for _ in range(random.randint(3, 6)):
-                gid = ''.join(random.choice(string.hexdigits) for _ in range(12))
+                gid = ''.join(random.choice(string.hexdigits)
+                              for _ in range(12))
                 file.write(f'\t\tГруппа {gid}\n')
                 file.write('Студент:\tОценка:\n')
                 for _ in range(random.randint(3, 7)):
-                    file.write(f'\t{random.choice(students)}\t\t\t{random.randint(1, 10)}\n')
+                    file.write(f'\t{random.choice(students)}'
+                               f'\t\t\t{random.randint(1, 10)}\n')
 
     _data: dict[str, dict] = {}
 
     @classmethod
     def read_student_file(cls):
-        with open('students.txt', encoding='UTF-8') as file:
+        with (open('students.txt', encoding='UTF-8') as file):
             for line in file:
                 lst = line.split()
                 if lst[0] == 'Группа':
@@ -46,8 +51,10 @@ class Students:
                     cls._data.setdefault(group, {'students': [], 'marks': []})
                     continue
                 if lst[0] != 'Студент:':
-                    cls._data[list(cls._data.keys())[-1]].setdefault('students', ).append(lst[0])
-                    cls._data[list(cls._data.keys())[-1]].setdefault('marks', ).append(int(lst[1]))
+                    cls._data[list(cls._data.keys())[-1]].setdefault('students',
+                                                                     ).append(lst[0])
+                    cls._data[list(cls._data.keys())[-1]].setdefault('marks',
+                                                                     ).append(int(lst[1]))
 
     @classmethod
     def write_student_file(cls):
@@ -104,7 +111,8 @@ class UefaJSON:
             dec_data = json.loads(file.read())
             new_dec_data = {k: v['Трофеев'] for k, v in dec_data.items()}
             lst = sorted(new_dec_data.items(), key=lambda item: item[1], reverse=True)
-            logger.debug('Клуб с наибольшим количеством побед: %s', lst[0][0])
+            logger.debug('Клуб с наибольшим количеством побед: %s',
+                         lst[0][0])
 
 
 class GoodsXML:
@@ -135,3 +143,22 @@ class GoodsXML:
             root = xmlET.fromstring(file.read())
             logger.debug('Общая стоимость всех товаров: %s',
                          sum(int(tel.attrib['price']) for tel in root))
+
+
+class BooksYAML:
+    def __init__(self, name, author, year_issue):
+        self.name = name
+        self.author = author
+        self.year_issue = year_issue
+        books_yaml = {self.name: [self.author, self.year_issue]}
+
+        with open('books.yaml', 'w') as file:
+            yaml.dump(books_yaml, file)
+
+    @staticmethod
+    def read_yaml():
+        with open('books.yaml') as file:
+            for name, (author, year_issue) in yaml.safe_load(file).items():
+                print(f'Название: {name}, '
+                      f'автор: {author}, '
+                      f'год выпуска: {year_issue}')
