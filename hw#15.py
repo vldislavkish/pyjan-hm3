@@ -1,4 +1,5 @@
 from enum import Enum
+from datetime import date
 
 
 class Order:
@@ -24,3 +25,12 @@ class Order:
     @classmethod
     def display_status(cls, order_id: str):
         print(cls._data[order_id])
+
+
+def day_difference(first_date: str, second_date: str):
+    year, month, day = map(int, first_date.split())
+    new_first_date = date(year, month, day)
+    year, month, day = map(int, second_date.split())
+    new_second_date = date(year, month, day)
+    return abs((new_first_date - new_second_date).days)
+
