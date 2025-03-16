@@ -34,3 +34,10 @@ def day_difference(first_date: str, second_date: str):
     new_second_date = date(year, month, day)
     return abs((new_first_date - new_second_date).days)
 
+
+def past_or_future_date(your_date: str):
+    year, month, day = map(int, your_date.split())
+    new_your_date = date(year, month, day)
+    dif = (date.today() - new_your_date).days
+    return 'Будущее' if dif < 0 else 'Прошлое'
+
