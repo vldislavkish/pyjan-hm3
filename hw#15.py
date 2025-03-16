@@ -1,5 +1,26 @@
 from enum import Enum
 from datetime import date
+import logging
+from logging.handlers import RotatingFileHandler
+
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+
+
+handler = RotatingFileHandler(
+    'user_actions.log',
+    maxBytes=1024,
+    backupCount=7,
+    encoding='utf-8'
+)
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
+stream = logging.StreamHandler()
+stream.setFormatter(formatter)
+logger.addHandler(stream)
 
 
 class Order:
@@ -20,11 +41,11 @@ class Order:
         if order_id in cls._data:
             cls._data[order_id] = next(cls._OrderStatus)
         else:
-            print('Ошибка')
+            logger.debug('Ошибка')
 
     @classmethod
     def display_status(cls, order_id: str):
-        print(cls._data[order_id])
+        logger.info('Статус: %s', cls._data[order_id])
 
 
 def day_difference(first_date: str, second_date: str):
@@ -41,3 +62,23 @@ def past_or_future_date(your_date: str):
     dif = (date.today() - new_your_date).days
     return 'Будущее' if dif < 0 else 'Прошлое'
 
+
+def loger_actions():
+    try:
+        logger.info("Начало программы")
+
+        # Имитация успешного действия
+        logger.info("Пользователь открыл файл")
+
+        # Имитация предупреждения
+        logger.warning("Пользователь ввёл неверные данные, запрос будет повторён")
+
+        # Имитация ошибки
+        raise ValueError("Ошибка чтения файла")
+    except Exception as e:
+        logger.error("Возникла ошибка: %s", e)
+    finally:
+        logger.info("Завершение программы")
+
+
+loger_actions()
