@@ -46,31 +46,45 @@ class Order:
                 cls._data[order_id] = next(cls._OrderStatus)
             except StopIteration:
                 # Если достигнут конец последовательности статусов
-                logger.warning('Статус для заказа %s уже на последнем этапе.', order_id)
+                logger.warning('Статус для заказа %s уже на последнем этапе.',
+                               order_id)
         else:
             logger.debug('Ошибка: заказ не найден.')
 
     @classmethod
     def display_status(cls, order_id: str):
         if order_id in cls._data:
-            logger.info('Статус заказа %s: %s', order_id, cls._data[order_id].name)
+            logger.info('Статус заказа %s: %s',
+                        order_id, cls._data[order_id].name)
         else:
             logger.error('Заказ с ID %s не найден.', order_id)
 
 
-def day_difference(first_date: str, second_date: str):
-    year, month, day = map(int, first_date.split())
-    new_first_date = date(year, month, day)
-    year, month, day = map(int, second_date.split())
-    new_second_date = date(year, month, day)
-    return abs((new_first_date - new_second_date).days)
+def day_difference():
+    fd, sd = (input('Введите дату в формате "year.month.day"\nПервая дата: '),
+              input('Вторая дата: '))
+    try:
+        year, month, day = map(int, fd.split('.'))
+        n_fd = date(year, month, day)
+        year, month, day = map(int, sd.split('.'))
+        n_sd = date(year, month, day)
+        return abs((n_fd - n_sd).days)
+    except ValueError as e:
+        logger.warning('Неправильно указана дата')
+        return e
 
 
-def past_or_future_date(your_date: str):
-    year, month, day = map(int, your_date.split())
-    new_your_date = date(year, month, day)
-    dif = (date.today() - new_your_date).days
-    return 'Будущее' if dif < 0 else 'Прошлое'
+def past_or_future_date():
+    yd = input('Введите дату в формате "year.month.day"\nВаша дата: ')
+
+    try:
+        year, month, day = map(int, yd.split('.'))
+        n_yd = date(year, month, day)
+        dif = (date.today() - n_yd).days
+        return 'Будущее' if dif < 0 else 'Прошлое'
+    except ValueError as e:
+        logger.warning('Неправильно указана дата')
+        return e
 
 
 def loger_actions():
@@ -81,7 +95,8 @@ def loger_actions():
         logger.info("Пользователь открыл файл")
 
         # Имитация предупреждения
-        logger.warning("Пользователь ввёл неверные данные, запрос будет повторён")
+        logger.warning("Пользователь ввёл неверные данные, "
+                       "запрос будет повторён")
 
         # Имитация ошибки
         raise ValueError("Ошибка чтения файла")
