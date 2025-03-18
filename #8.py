@@ -9,7 +9,6 @@ class TicTacToe:
         print(*cls.data[1], sep='\t', end='\n3\t')
         print(*cls.data[2], sep='\t', end='\n')
 
-
     @classmethod
     def win(cls, sel):
         data_win = [cls.data[0], cls.data[1], cls.data[2],
@@ -22,13 +21,9 @@ class TicTacToe:
             if dw.count(sel) == 3:
                 return True
         return False
-
-
-
-
-    print('Игра рассчитана на двух игроков.\nИгрок 1 ставит "+", игрок 2 ставит "-".\n'
+    print('Игра рассчитана на двух игроков.\nИгрок 1 ставит "+", '
+          'игрок 2 ставит "-".\n'
           'Желаю хорошо провести время. Удачи!\n')
-
 
     @classmethod
     def play(cls):
@@ -54,7 +49,6 @@ class TicTacToe:
                 flag = cls.win(player)
 
                 cls.show_field()
-
 
 
 ttt = TicTacToe()
