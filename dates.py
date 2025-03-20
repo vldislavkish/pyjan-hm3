@@ -2,14 +2,10 @@ from datetime import date
 from log import logger
 
 
-def day_difference():
-    fd, sd = (input('Введите дату в формате "year.month.day"\nПервая дата: '),
-              input('Вторая дата: '))
+def day_difference(fd, sd):
     try:
-        year, month, day = map(int, fd.split('.'))
-        n_fd = date(year, month, day)
-        year, month, day = map(int, sd.split('.'))
-        n_sd = date(year, month, day)
+        fd_object = datetime.strptime(..)
+        sd_object = datetime.strptime(..)
         return abs((n_fd - n_sd).days)
     except ValueError as e:
         logger.warning('Неправильно указана дата')
