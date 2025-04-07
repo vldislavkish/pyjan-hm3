@@ -5,6 +5,9 @@ import string
 class Bank:
     _data: dict[str, dict] = {}
 
+    def show_data(self):
+        return self._data
+
     def register_client(self):
         name = input('Введите свое имя: ')
         client_id = ''.join(random.choice(string.hexdigits) for _ in range(12))
@@ -143,20 +146,3 @@ class Library:
                 print('Вы не брали такую книгу')
         else:
             print('Неверный ID')
-
-
-lib = Library()
-lib.adding_book('Tolkien', 'Hobbit', 400, '000465189')
-# lib.adding_book('Tolkien', 'Rabbit', 123, '000498789489')
-# lib.adding_book('Tolstoy', 'Miru mir', 13, '123123123213')
-lib.adding_reader()
-lib.get_book()
-lib.adding_reader()
-lib.reserve_book()
-lib.get_book()
-# lib.reserve_book()
-# lib.reserve_book()
-# lib.cancel_reserve()
-# lib.get_book()
-# lib.return_book()
-# lib.get_book()
