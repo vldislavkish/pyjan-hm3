@@ -3,31 +3,31 @@ import string
 
 
 class Bank:
-    _data: dict[str, dict] = {}
+    __data: dict[str, dict] = {}
 
     def show_data(self):
-        return self._data
+        return self.__data
 
     def register_client(self):
         name = input('Введите свое имя: ')
         client_id = ''.join(random.choice(string.hexdigits) for _ in range(12))
         print(f'Ваш ID: {client_id}')
-        self._data.setdefault(client_id, {'name': name})
+        self.__data.setdefault(client_id, {'name': name})
 
     def open_deposit_account(self):
         client_id = input('Введите Ваш ID: ')
-        if client_id in self._data:
+        if client_id in self.__data:
             start_balance = int(input('Введите Ваш вклад: '))
             years = int(input('Введите срок (лет): '))
-            self._data.setdefault(client_id, {}).update(start_balance=start_balance, years=years)
+            self.__data.setdefault(client_id, {}).update(start_balance=start_balance, years=years)
         else:
             print('Ошибка. Неправильно введён ID')
 
     def calc_deposit_interest_rate(self):
         client_id = input('Введите Ваш ID: ')
-        if client_id in self._data and len(self._data.get(client_id)) > 1:
-            month = self._data.get(client_id).get('years') * 12
-            balance = self._data.get(client_id).get('start_balance')
+        if client_id in self.__data and len(self.__data.get(client_id)) > 1:
+            month = self.__data.get(client_id).get('years') * 12
+            balance = self.__data.get(client_id).get('start_balance')
             procent = 10 / 12 / 100
             dep = tuple(balance + (balance * procent * (i + 1)) for i in range(month))
             print(f'За {month} месяцев на Вашем балансе будет {dep[-1]} под 10% годовых,'
@@ -37,8 +37,8 @@ class Bank:
 
     def close_deposit(self):
         client_id = input('Введите Ваш ID: ')
-        if client_id in self._data:
-            del self._data[client_id]
+        if client_id in self.__data:
+            del self.__data[client_id]
         else:
             print('Ошибка. Неправильно введён ID')
 
