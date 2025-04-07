@@ -7,7 +7,7 @@ class TestRegisterClient(unittest.TestCase):
     @patch('builtins.input', side_effect=["vlad", "petya", "lena"])
     @patch('random.choice', side_effect=lambda seq: seq[0])  # Возвращает всегда первый элемент
     @patch('builtins.print')  # Подменяем print для подавления вывода
-    def test_unique_ids(self, mock_print, mock_random_choice, mock_input):
+    def test_unique_ids(self, _, __, ___): # игнорируем неиспользуемые аргументы
         bank = Bank()
 
         # Регистрируем нескольких клиентов
