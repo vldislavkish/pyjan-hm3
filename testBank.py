@@ -94,5 +94,19 @@ class TestCalcDepositInterestRate(unittest.TestCase):
         self.assertIn('1480.8000000000002', captured_output.getvalue())
 
 
+class TestCloseDeposit(unittest.TestCase):
+    def setUp(self):
+        self.test_data = {'qwe123': {'name': 'qwe', 'start_balance': 1234, 'years': 12}}
+
+    @patch('builtins.input', side_effect=['qwe123'])
+    def test_empty_data(self, _):
+        obj = Bank()
+        obj.set_data(self.test_data)
+
+        obj.close_deposit()
+
+        self.assertEqual({}, obj.show_data())
+
+
 if __name__ == "__main__":
     unittest.main()
