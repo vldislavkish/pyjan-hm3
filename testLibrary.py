@@ -65,6 +65,9 @@ class TestReserveBook(unittest.TestCase):
         self.obj.reserve_book()
         # Проверяем, что книга зарезервирована (флаг изменился на True)
         self.assertTrue(list(self.obj.return_data_books().values())[0][0])
+        # Проверяем, что книга зарезервирована за пользователем
+        self.assertEqual(tuple(self.obj.return_data_readers().values())[0]['reserved'][0],
+                         ('qwe', 'asd', '123', '12aw21'))
 
 
 if __name__ == '__main__':

@@ -161,15 +161,3 @@ class Library:
                 print('Вы не брали такую книгу')
         else:
             print('Неверный ID')
-
-
-if __name__ == '__main__':
-    lib = Library()
-    lib.adding_book('qwe', 'asd', '123', '12aw21')
-    lib.adding_reader()
-    print(lib._data_readers)
-    print(lib._data_books)
-    lib.reserve_book()
-    print(list(lib.return_data_books().values())[0][0])
-    print(lib._data_readers)
-    print(lib._data_books)
