@@ -1,4 +1,6 @@
 import unittest
+import io
+import sys
 from unittest.mock import patch
 from bank_library import Bank
 
@@ -34,6 +36,36 @@ class TestRegisterClient(unittest.TestCase):
         self.assertIn(client_id_output, bank.show_data())
         # Проверяем, что имя сохранено корректно
         self.assertEqual(bank.show_data()[client_id_output]['name'], "nik")
+
+
+class TestOpenDepositAccount(unittest.TestCase):
+    def setUp(self):
+        self.test_data = {'123': {}}
+
+    @patch('builtins.input', side_effect=['123', '1000', '5'])
+    def test_valid_input(self, _):
+        obj = Bank()
+        obj.set_data(self.test_data)
+        obj.open_deposit_account()
+        self.assertEqual(obj.show_data()['123'], {'start_balance': 1000, 'years': 5})
+
+    @patch('builtins.input', side_effect=['456'])
+    def test_invalid_id(self, _):
+        obj = Bank()
+        obj.set_data(self.test_data)
+
+        # Перенаправляем вывод в StringIO
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        # Вызываем тестируемую функцию
+        obj.open_deposit_account()
+
+        # Возвращаем стандартный вывод
+        sys.stdout = sys.__stdout__
+
+        # Проверяем, что вывод содержит сообщение об ошибке
+        self.assertIn('Ошибка. Неправильно введён ID', captured_output.getvalue())
 
 
 if __name__ == "__main__":

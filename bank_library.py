@@ -8,6 +8,9 @@ class Bank:
     def show_data(self):
         return self.__data
 
+    def set_data(self, new_data):
+        self.__data = new_data
+
     def register_client(self):
         name = input('Введите свое имя: ')
         client_id = ''.join(random.choice(string.hexdigits) for _ in range(12))
