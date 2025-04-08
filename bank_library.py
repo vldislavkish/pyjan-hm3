@@ -50,8 +50,11 @@ class Library:
     _data_books: dict[tuple, list] = {}
     _data_readers: dict[str, dict] = {}
 
-    def return_data_books(self, r_data_books):
-        self._data_books = r_data_books
+    def red_data_books(self, red_data_books):
+        self._data_books = red_data_books
+
+    def return_data_readers(self):
+        return self._data_readers
 
     def show_list_books(self):
         for author, book_name, num_pages, isbn in self._data_books:
