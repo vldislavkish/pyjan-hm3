@@ -1,4 +1,4 @@
-# from unittest.mock import patch
+from unittest.mock import patch
 import unittest
 import io
 import sys
@@ -50,6 +50,21 @@ class TestAddingReader(unittest.TestCase):
 
         # Проверяем, что у нового пользователя списки пустые
         self.assertEqual(self.obj.return_data_readers()[client_id], {'reserved': [], 'taken': []})
+
+
+class TestReserveBook(unittest.TestCase):
+    def setUp(self):
+        self.obj = Library()
+        self.obj.red_data_books({('qwe', 'asd', '123', '12aw21'): [False, False]})
+        self.obj.red_data_readers({'id123': {'reserved': [], 'taken': []}})
+
+    @patch('builtins.input', side_effect=['id123', '12aw21'])
+    @patch('builtins.print')
+    def test_reserve_book(self, _, __):
+
+        self.obj.reserve_book()
+        # Проверяем, что книга зарезервирована (флаг изменился на True)
+        self.assertTrue(list(self.obj.return_data_books().values())[0][0])
 
 
 if __name__ == '__main__':
