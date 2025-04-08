@@ -50,6 +50,9 @@ class Library:
     _data_books: dict[tuple, list] = {}
     _data_readers: dict[str, dict] = {}
 
+    def return_data_books(self, r_data_books):
+        self._data_books = r_data_books
+
     def show_list_books(self):
         for author, book_name, num_pages, isbn in self._data_books:
             reserved = 'ЗАРЕЗЕРВИРОВАНА' \
@@ -149,3 +152,10 @@ class Library:
                 print('Вы не брали такую книгу')
         else:
             print('Неверный ID')
+
+
+if __name__ == '__main__':
+    lib = Library()
+    lib.adding_book('qwe', 'asd', '123', '12aw21')
+    print(lib._data_books)
+    lib.show_list_books()

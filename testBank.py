@@ -2,8 +2,6 @@ import unittest
 import io
 import sys
 from unittest.mock import patch
-
-
 from bank_library import Bank
 
 
