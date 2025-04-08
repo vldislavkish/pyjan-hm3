@@ -2,6 +2,8 @@ import unittest
 import io
 import sys
 from unittest.mock import patch
+
+
 from bank_library import Bank
 
 
@@ -66,6 +68,30 @@ class TestOpenDepositAccount(unittest.TestCase):
 
         # Проверяем, что вывод содержит сообщение об ошибке
         self.assertIn('Ошибка. Неправильно введён ID', captured_output.getvalue())
+
+
+class TestCalcDepositInterestRate(unittest.TestCase):
+    def setUp(self):
+        self.test_data = {'qwe123': {'name': 'qwe', 'start_balance': 1234, 'years': 12}}
+
+    @patch('builtins.input', side_effect=['qwe123'])
+    def test_correct_calculation(self, _):
+        obj = Bank()
+        obj.set_data(self.test_data)
+
+        # Перенаправляем вывод в StringIO
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+
+        # Вызываем тестируемую функцию
+        obj.calc_deposit_interest_rate()
+
+        # Возвращаем стандартный вывод
+        sys.stdout = sys.__stdout__
+
+        # Проверяем баланс и разницу
+        self.assertIn('2714.8', captured_output.getvalue())
+        self.assertIn('1480.8000000000002', captured_output.getvalue())
 
 
 if __name__ == "__main__":
