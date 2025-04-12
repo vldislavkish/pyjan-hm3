@@ -70,5 +70,27 @@ class TestReserveBook(unittest.TestCase):
                          ('qwe', 'asd', '123', '12aw21'))
 
 
+class TestReserveBookBeingRead(unittest.TestCase):
+    def setUp(self):
+        self.obj = Library()
+        self.obj.red_data_books({('qwe', 'asd', '123', 'q1'): [False, True]})
+        self.obj.red_data_readers({'8b3': {'reserved': [], 'taken': [('qwe', 'asd', '123', 'q1')]},
+                                   'b2d': {'reserved': [], 'taken': []}})
+
+    @patch('builtins.input', side_effect=['b2d', 'q1'])
+    @patch('builtins.print')
+    def test_reserve_book_being_read(self, _, __):
+
+        self.obj.reserve_book()
+        # Проверяем, что книга зарезервирована за пользователем
+        # и по-прежнему взята другим пользователем
+        self.assertTrue(self.obj.return_data_readers()['b2d']['reserved'][0])
+        self.assertEqual(self.obj.return_data_readers()['8b3']['taken'][0],
+                         ('qwe', 'asd', '123', 'q1'))
+
+        # Проверяем, что книга взята и зарезервирована
+        self.assertEqual(sum(self.obj.return_data_books()[('qwe', 'asd', '123', 'q1')]), 2)
+
+
 if __name__ == '__main__':
     unittest.main()
